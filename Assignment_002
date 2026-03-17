@@ -1,1 +1,65 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void processGrades(int rows, int cols, int (*grades)[100]);
+
+int main() {
+    int numStudents, numSubjects;
+
+    cout << "Enter number of students: ";
+    cin >> numStudents;
+    cout << "Enter number of subjects: ";
+    cin >> numSubjects;
+
+    int grades[100][100];
+    cout << "\nEnter grades for each student per subject:\n";
+    for (int i = 0; i < numStudents; i++) {
+        cout << "Student " << (i + 1) << ":\n";
+        for (int j = 0; j < numSubjects; j++) {
+            cout << "Subject " << (j + 1) << ": ";
+            cin >> grades[i][j];
+        }
+    }
+
+    processGrades(numStudents, numSubjects, grades);
+
+    return 0;
+}
+
+void processGrades(int rows, int cols, int (*grades)[100]) {
+    cout << "\n--- Grade Matrix ---\n";
+    cout << "          ";
+    for (int j = 0; j < cols; j++) {
+        cout << setw(8) << "Sub " << (j + 1);
+    }
+    cout << "\n";
+    for (int i = 0; i < rows; i++) {
+        cout << "Student " << setw(2) << (i + 1);
+        for (int j = 0; j < cols; j++) {
+            cout << setw(10) << grades[i][j];
+        }
+        cout << "\n";
+    }
+
+    cout << "\n--- Student Averages ---\n";
+    for (int i = 0; i < rows; i++) {
+        int sum = 0;
+        for (int j = 0; j < cols; j++) {
+            sum += grades[i][j];
+        }
+        double avg = static_cast<double>(sum) / cols;
+        cout << "Student " << (i + 1) << ": " << fixed << setprecision(2) << avg << "\n";
+    }
+
+    int highest = grades[0][0];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (grades[i][j] > highest) {
+                highest = grades[i][j];
+            }
+        }
+    }
+    cout << "\nHighest grade in the matrix: " << highest << "\n";
+}
 
