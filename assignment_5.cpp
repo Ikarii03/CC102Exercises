@@ -30,7 +30,7 @@ int main(){
 
     file1.open("sorted.txt", ios :: out);
 
-    file.open("original.txt", ios :: in);
+    file.open("orig.txt", ios :: in);
     if(file.is_open() && file1.is_open())
     {
         string line;
@@ -42,6 +42,7 @@ int main(){
         for(int i = 0; i < colors.size();i++){
             file1 << colors[i] << endl;
         }
+        
         file.close();
         file1.close();
         
